@@ -48,7 +48,7 @@ X = np.append(arr=np.ones((14,1)).astype(int),  values=data, axis=1)
 
 
 X_list = data.iloc[:,[0,1,2,5]].values 
-#[0,1,2,3,4,5] yapıldıgında x3ün ve x4ün[teker teker kontrol edilid] 
+#[0,1,2,3,4,5] yapıldıgında 3 ve 4 indisli stuunlar[teker teker kontrol edildi] 
 #p degeri cok yuksek çıktıgı için sistemden çıkartıldı
 
 model = sm.OLS(play_df, X_list).fit()
