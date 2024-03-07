@@ -24,18 +24,18 @@ predict = lin_reg.predict(poly_reg.fit_transform(x))
 
 plt.scatter(x,y, color='red')
 plt.plot(x,predict,color='green')
-
+plt.show()
 
 # support vector regression scaler ile kullanmamız gerekli veriler uzerindeki marjinal verilere duyarlı
 
 x_sc = StandardScaler().fit_transform(x)
 y_sc = StandardScaler().fit_transform(y)
-plt.show()
+
 
 # SVR        svm -> support vector machine
 from sklearn.svm import SVR
 
-svr_reg = SVR(kernel="rbf")
+svr_reg = SVR(kernel="rbf") # kernel = 'poly'  || kernel = 'linear'
 svr_reg.fit(x_sc , y_sc)
 
 plt.scatter(x_sc , y_sc)
