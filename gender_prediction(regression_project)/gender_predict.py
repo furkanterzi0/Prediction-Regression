@@ -78,7 +78,7 @@ user_pred = svr_reg.predict(user_data_sc)
 
 print("Predicted gender: ", "Female" if user_pred <= 0 else "Male")
 
-print(f'R2 SCORE DEGERİ : {r2_score(y_test, y_pred)}')
+print(f'R2 SCORE DEGERİ : {r2_score(y_test, y_pred)}') #0.6358309710132817
 
 
 
