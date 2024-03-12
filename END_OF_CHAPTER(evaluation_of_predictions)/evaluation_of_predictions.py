@@ -15,14 +15,14 @@ Created on Mon Mar 11 22:46:25 2024
 
 import pandas as pd
 import numpy as np
+from sklearn.svm import SVR
+import statsmodels.api as sm
+from sklearn.metrics import r2_score
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
-from sklearn.svm import SVR
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor
-import statsmodels.api as sm
-from sklearn.metrics import r2_score
 
 
 data = pd.read_csv('maaslar_yeni.csv')
