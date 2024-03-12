@@ -156,4 +156,5 @@ print(f'RF R2 SCORE : { r2_score(y, y_pred_rf ) }') # 0.951818868839326
 print(f'RF - TEST PERSON CEO MAAS : { rf_reg.predict(test_person_ceo) }') # 54750
 print(f'RF - TEST PERSON MUDUR MAAS : { rf_reg.predict(test_person_mudur) }') # 11370
 
+print("\n\n\n\n\n")
 
