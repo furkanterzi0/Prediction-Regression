@@ -12,6 +12,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.svm import SVR
 import matplotlib.pyplot as plt
 from sklearn.metrics import r2_score
+import statsmodels.api as sm
 
 original_data = pd.read_csv('data.csv') 
 
@@ -19,8 +20,8 @@ gender = original_data[['Gender']]
 
 gender_le = LabelEncoder().fit_transform(gender)
 
-x = original_data.iloc[:,:3]
-y = pd.DataFrame(data=gender_le,index=range(40),columns=['gender'])
+x = original_data.iloc[:,:3].values
+y = pd.DataFrame(data=gender_le,index=range(40),columns=['gender']).values
 
 x_train, x_test, y_train, y_test = train_test_split(x,y,test_size=0.30,random_state=0)
 
@@ -32,15 +33,12 @@ y_pred = LinearRegression().fit(x_train, y_train).predict(x_test)
 svr_reg = SVR(kernel='rbf',degree=3)
 
 scaler_x = StandardScaler() # !!!!
-scaler_y = StandardScaler() # !!!!
 
 x_train_sc = scaler_x.fit_transform(x_train)
 x_test_sc = scaler_x.transform(x_test)
 
-y_train_sc = scaler_y.fit_transform(y_train)
-y_test_sc = scaler_y.transform(y_test)
 
-svr_reg.fit(x_train_sc, y_train_sc)
+svr_reg.fit(x_train_sc, y_train)
 y_pred_svr = svr_reg.predict(x_test_sc)
 
 
@@ -60,7 +58,7 @@ for item in y_pred_svr:
     count+=1
 ''' 
 
-plt.plot(y_test_sc)
+plt.plot(y_test)
 plt.plot(y_pred_svr)
 plt.show()
 
@@ -76,16 +74,14 @@ user_data_sc = scaler_x.transform(user_data) # !
 
 user_pred = svr_reg.predict(user_data_sc)
 
-print("Predicted gender: ", "Female" if user_pred <= 0 else "Male")
+print("Predicted gender: ", "Female" if user_pred <= 0.5 else "Male")
 
-print(f'R2 SCORE DEGERİ : {r2_score(y_test, y_pred)}') #0.6358309710132817
-
-
+print(f'R2 SCORE DEGERİ : {r2_score(y_test, y_pred)}')
 
 
 
-
-
+model = sm.OLS(y_pred_svr, y_test)
+print(model.fit().summary()) # R-squared (uncentered): 0.861
 
 
         
